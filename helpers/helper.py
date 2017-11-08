@@ -1,7 +1,6 @@
 import pickle
 
 import os
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
@@ -64,6 +63,9 @@ def login(driver):
 
 
 def open_some_menu_with_submenu(driver):
-    ActionChains(driver).\
-        click(menu_page.get_menu_with_sub_menu(driver)).\
+    menu_page.get_menu_with_sub_menu(driver).click()
+    driver.switch_to.frame(
+        menu_page.get_menu_with_sub_menu_frame(driver))
+    ActionChains(driver). \
+        move_to_element(menu_page.get_some_menu_with_sub_menu(driver)). \
         perform()
